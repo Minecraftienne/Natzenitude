@@ -16,4 +16,14 @@ public class Quitter : MonoBehaviour {
 	void OnMouseDown(){
 		Application.Quit ();
 	}
+
+	void OnMouseEnter ()
+	{
+		this.renderer.material.color = Color.black;
+	}
+
+	void OnMouseExit ()
+	{
+		this.renderer.material.color = Color.white;
+	}
 }

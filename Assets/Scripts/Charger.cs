@@ -16,4 +16,14 @@ public class Charger : MonoBehaviour {
 	void OnMouseDown() {
 		
 	}
+
+	void OnMouseEnter ()
+	{
+		this.renderer.material.color = Color.black;
+	}
+	
+	void OnMouseExit ()
+	{
+		this.renderer.material.color = Color.white;
+	}
 }

@@ -16,4 +16,14 @@ public class NouvellePartie : MonoBehaviour {
 	void OnMouseDown() {		
 		Application.LoadLevel ("Placard");
 	}
+
+	void OnMouseEnter ()
+	{
+		this.renderer.material.color = Color.black;
+	}
+	
+	void OnMouseExit ()
+	{
+		this.renderer.material.color = Color.white;
+	}
 }
