@@ -83,6 +83,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 859692577}
   - 114: {fileID: 859692578}
+  - 114: {fileID: 859692579}
   m_Layer: 0
   m_Name: 0 - Scripts background
   m_TagString: Untagged
@@ -350,6 +351,19 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+--- !u!114 &859692579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 859692576}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472680f2166520b498982853b11a4b63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myGUISkin: {fileID: 11400000, guid: b25cf6e6786b8034987c3aa11057eccf, type: 2}
+  _timer: 0
 --- !u!1 &873645972
 GameObject:
   m_ObjectHideFlags: 0
