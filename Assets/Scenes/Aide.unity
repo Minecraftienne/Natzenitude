@@ -188,6 +188,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalWidth: 1280
   originalHeight: 800
+  vSbarValue: 0
+  succes365: 0
+  succesRichesse: 0
+  succesTueurPlantes: 0
+  succesInsectes: 0
+  succcesMiniJeux: 0
+  succesMalchanceux: 0
+  succesTropGourmand: 0
+  succesCollectionneur: 0
+  succesActionReaction: 0
+  succesFiasco: 0
+  miniature365: {fileID: 2800000, guid: 90b8aaf5a98bae24fa3856871563df16, type: 3}
+  miniatureRichesse: {fileID: 2800000, guid: 3b5f27c8f1f7c5d40be4c673def2de81, type: 3}
+  miniatureTueurPlantes: {fileID: 2800000, guid: 0e919a715014b5b458396d8cad3b42de,
+    type: 3}
+  miniatureInsectes: {fileID: 2800000, guid: e8b59bb39b2799d4bb172cbe85b81073, type: 3}
+  miniatureMiniJeux: {fileID: 2800000, guid: 328f8ae6420a10d46aa132b7db053a73, type: 3}
+  miniatureMalchanceux: {fileID: 2800000, guid: f140ed78e5688844bb78b308cf9eab54,
+    type: 3}
+  miniatureTropGourmand: {fileID: 2800000, guid: 0284410365767bd43bd0742ea5aa53f0,
+    type: 3}
+  miniatureCollectionneur: {fileID: 2800000, guid: dd5fe992cc1b985418fd7ce9e327e1ab,
+    type: 3}
+  miniatureActionReaction: {fileID: 2800000, guid: 6a7319492d80a7b4a838632371ee2590,
+    type: 3}
+  miniatureFiasco: {fileID: 2800000, guid: a59b2b4ce4cb1144291632f530cef960, type: 3}
 --- !u!1 &1842672721
 GameObject:
   m_ObjectHideFlags: 0

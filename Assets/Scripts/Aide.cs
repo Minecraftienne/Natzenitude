@@ -2,21 +2,58 @@
 using System.Collections;
 
 public class Aide : MonoBehaviour {
-	
-	
+
+	#region Variables
 	public float originalWidth = 1280.0f;  // define here the original resolution
 	public float originalHeight = 800.0f; // you used to create the GUI contents 
 	private Vector3 scale;
 
-	void Start(){
+	// Barre de scrolling verticale
+	public float vSbarValue;
+
+	private bool activeLabelBut = false;
+	private bool activeLabelArgent = false;
+	private bool activeLabelSucces = false;
+	private bool activeLabelObjectifs = false;
+	private bool activeLabelChallenges = false;
+
+	public bool succes365 = false;
+	public bool succesRichesse = false;
+	public bool succesTueurPlantes = false;
+	public bool succesInsectes = false;
+	public bool succcesMiniJeux = false;
+	public bool succesMalchanceux = false;
+	public bool succesTropGourmand = false;
+	public bool succesCollectionneur = false;
+	public bool succesActionReaction = false;
+	public bool succesFiasco = false;
+
+	// Images des succès
+	public Texture2D miniature365;
+	public Texture2D miniatureRichesse;
+	public Texture2D miniatureTueurPlantes;
+	public Texture2D miniatureInsectes;
+	public Texture2D miniatureMiniJeux;
+	public Texture2D miniatureMalchanceux;
+	public Texture2D miniatureTropGourmand;
+	public Texture2D miniatureCollectionneur;
+	public Texture2D miniatureActionReaction;
+	public Texture2D miniatureFiasco;
+	#endregion
+
+	void Start() {
 		originalWidth = 1280.0f;
 		originalHeight = 800.0f;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	
+	void Update() {
+
 	}
+
+/*	void AfficherSucces() {
+
+	}*/
 	
 	void OnGUI() {
 		
@@ -36,17 +73,178 @@ public class Aide : MonoBehaviour {
 		
 		// Menu à gauche
 		GUI.Box(new Rect(240, 160, 140, 500), "");
-		
-		GUI.Button(new Rect(250, 190, 120, 30), "But du jeu");
-		GUI.Button(new Rect(250, 230, 120, 30), "Gagner de l'argent");
-		GUI.Button(new Rect(250, 270, 120, 30), "Succès");
-		GUI.Button(new Rect(250, 310, 120, 30), "Objectifs");
-		GUI.Button(new Rect(250, 350, 120, 30), "Challenges");
+
+		if (GUI.Button (new Rect (250, 190, 120, 30), "But du jeu")) {
+
+			activeLabelBut = !activeLabelBut;
+			activeLabelArgent = false;
+			activeLabelSucces = false;
+			activeLabelObjectifs = false;
+			activeLabelChallenges = false;
+		}
+
+		if (activeLabelBut) {
+
+			GUI.Label (new Rect (450, 190, 600, 50), "Le but de Natzenitude est que vous preniez soin de votre plante jusqu'à ce qu'elle soit arrivée" +
+			" à son dernier stade d'évolution, où vous pourrez alors la vendre et gagner de l'argent en fonction" +
+			" de différents critères ; ensuite vous aurez la possibilité d'en rachetez d'autres via la Boutique.");
+		}
+	
+		if (GUI.Button (new Rect (250, 230, 120, 30), "Gagner de l'argent")) {
+
+			activeLabelArgent = !activeLabelArgent;
+			activeLabelBut = false;
+			activeLabelSucces = false;
+			activeLabelObjectifs = false;
+			activeLabelChallenges = false;
+		}
+
+		if (activeLabelArgent) {
+
+			GUI.Label (new Rect (450, 190, 600, 120), "Pour gagner de l'argent il faut vendre votre plante une fois qu'elle a atteint son dernier stade d'évolution. Le prix est déterminé par plusieurs critères : " +
+			"\n• la qualité => moins la plante aura subi de dommages (trop d'engrais, pas assez d'arrosage...), meilleur prix vous pourrez en tirez." +
+			"\n• la quantité => ?" +
+			"\n• la rapidité => en évitant les malus et retards de croissance, et en obtenant des bonus de croissance, la plante grandira plus vite et vous gagnerez plus d'argent.");
+		}
+
+		#region Succès
+		if (GUI.Button (new Rect (250, 270, 120, 30), "Succès")) {
+
+			activeLabelSucces = !activeLabelSucces;
+			activeLabelArgent = false;
+			activeLabelBut = false;
+			activeLabelObjectifs = false;
+			activeLabelChallenges = false;
+		}
+
+		if (activeLabelSucces) {
+			
+			/* Algorithme succès : ex 365 jours
+			 SI le joueur est au jour >= 365, alors succes365 = vrai
+			 SI succes365 == vrai, alors fonction AfficherSucces
+
+			 fonction AfficherSucces(texture2D, string)
+			 afficher fenetre en haut de l'écran (genre succes steam) avec écrit
+			 miniatureSucces+ "Succès " +titreSucces " réussi."
+			 imageGrisee devient imageNormale et texteGrise devient texteNormal */
+
+			vSbarValue = GUI.VerticalScrollbar(new Rect(1096, 160, 100, 500), vSbarValue, 1.0F, 10.0F, 0.0F);
+
+			// Affichage des succès (image, titre, description)
+			GUI.DrawTexture(new Rect(430, 190, 100, 100), miniature365, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (470, 180, 100, 20), "1 an");
+			GUI.Label (new Rect (560, 220, 200, 20), "Atteindre 365 jours.");
+
+			GUI.DrawTexture(new Rect(430, 300, 100, 100), miniatureRichesse, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (450, 290, 100, 20), "Richesse");
+			GUI.Label (new Rect (560, 330, 200, 20), "Avoir 10 000 euros.");
+
+			GUI.DrawTexture(new Rect(430, 410, 100, 100), miniatureTueurPlantes, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (450, 400, 100, 20), "Tueur de plantes");
+			GUI.Label (new Rect (560, 440, 300, 20), "Tuer sa plante (peu importe la cause).");
+
+			GUI.DrawTexture(new Rect(430, 520, 100, 100), miniatureInsectes, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (440, 510, 150, 20), "La folie des insectes");
+			GUI.Label (new Rect (560, 550, 400, 20), "Voir sa plante se faire attaquée par des insectes.");
+
+			GUI.DrawTexture(new Rect(430, 630, 100, 100), miniatureMiniJeux, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (470, 620, 100, 20), "Je gère");
+			GUI.Label (new Rect (560, 660, 300, 20), "Réussir tous les mini-jeux.");
+
+			GUI.DrawTexture(new Rect(430, 740, 100, 100), miniatureMalchanceux, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (440, 730, 100, 20), "Malchanceux");
+			GUI.Label (new Rect (560, 770, 500, 20), "En une seule partie avoir été victime de tous les incidents possibles.");
+			
+			GUI.DrawTexture(new Rect(430, 850, 100, 100), miniatureTropGourmand, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (440, 840, 100, 20), "Trop gourmand");
+			GUI.Label (new Rect (560, 880, 400, 20), "Tuer sa plante en lui donnant trop d'engrais.");
+
+			GUI.DrawTexture(new Rect(430, 960, 100, 100), miniatureCollectionneur, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (440, 950, 100, 20), "Collectionneur");
+			GUI.Label (new Rect (560, 990, 500, 20), "Acheter tout ce que la boutique offre (matériel, produits...).");
+
+			GUI.DrawTexture(new Rect(430, 1070, 100, 100), miniatureActionReaction, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (440, 1060, 100, 20), "Action/Réaction");
+			GUI.Label (new Rect (560, 1100, 400, 20), "Résoudre en une seule journée un incident.");
+
+			GUI.DrawTexture(new Rect(430, 1180, 100, 100), miniatureFiasco, ScaleMode.ScaleToFit, true);
+			GUI.Label (new Rect (470, 1170, 100, 20), "Fiasco");
+			GUI.Label (new Rect (560, 1210, 400, 20), "Ne plus avoir d'argent ni de plante en vie.");
+
+			// Vérification pour voir si les succès ont été accomplis
+			if (Placard.jour >= 365) {
+
+				succes365 = true;
+		//		AfficherSucces();
+		//		GUI.Window (1, new Rect (250, 0, 200, 50), GUI.WindowFunction, "Succès");
+				GUI.DrawTexture(new Rect(300, 0, 100, 100), miniature365, ScaleMode.ScaleToFit, true);
+				GUI.Label (new Rect (350, 0, 200, 20), "Succès 1 an réussi");
+			}
+
+			if (Boutique.argent >= 10000) {
+
+				succesRichesse = true;
+			}
+
+		/* if (Plante.etat.morte == true), alors succesTueurPlantes = true;
+
+		   if (Plante.Incidents.incidentInsectes == 1), alors succesInsectes = true;
+
+		   if (MiniJeux.nom1 == true && MiniJeux.nom2 == true && etc), alors succesMiniJeux = true;
+		   le mini-jeux devient true seulement s'il a déjà été réussi une fois?
+
+		   if (??), alors succesMalchanceux = true;
+		   peut etre faire un compteur d'incidents, exemple on part de 0 et à chaque fois qu'on a un incident d'un tel
+		   type on augmente de 1, ainsi si incidentVentilation on augmente de 1 un int (compteurIncidentVentilation)
+		   si compteurIncidentVentilation >= à 1 && compteurIncidentInsectes >= 1 etc... alors le succès est vrai
+
+		   if (Plante.etat.morte == true && engraisTrop && Plante.Incidents.incidentEngrais == 1),
+		   alors succesTropGourmand = true;
+
+		   if (?), alors succesCollectionneur = true;
+
+	       if (?), alors succesActionReaction = true;
+
+		   if (Boutique.argent == 0 && Plante.etat.morte == true), alors succesFiasco = true; */
+		}
+		#endregion
+
+		if (GUI.Button (new Rect (250, 310, 120, 30), "Objectifs")) {
+
+			activeLabelObjectifs = !activeLabelObjectifs;
+			activeLabelArgent = false;
+			activeLabelSucces = false;
+			activeLabelBut = false;
+			activeLabelChallenges = false;
+		}
+
+		if (activeLabelObjectifs) {
+
+			GUI.Label (new Rect (450, 190, 600, 50), "Les objectifs journaliers sont facultatifs mais sachez que si vous les accomplissez," +
+		    "la plante obtient un bonus de croissance le lendemain, tandis que si vous ne les réalisez pas," +
+		    "la plante peut obtenir un malus de croissance le lendemain.");
+		}
+
+		if (GUI.Button (new Rect (250, 350, 120, 30), "Challenges")) {
+
+			activeLabelChallenges = !activeLabelChallenges;
+			activeLabelArgent = false;
+			activeLabelSucces = false;
+			activeLabelObjectifs = false;
+			activeLabelBut = false;
+		}
+
+		if (activeLabelChallenges) {
+
+			GUI.Label (new Rect (450, 190, 600, 80), "Ce sont des opportunités qui apparaissent aléatoirement dans la petite fenêtre de la boutique." +
+			"Un vendeur apparaît dans le cadre et vous propose un mini-jeu que vous êtes libre d'accepter ou de refuser." +
+			"Si vous réussissez le mini-jeu, le vendeur peut soit vous faire une remise sur un objet de la boutique au choix," +
+	        "soit vous donnez de l'argent, ou soit vous offrir un objet de la boutique au hasard, c'est aléatoire.");
+		}
 		
 		if (GUI.Button(new Rect(250, 610, 120, 30), "Retour")) {
 			
 			Application.LoadLevel ("Placard");
-			
 		}
 		
 		// Affichage au centre
