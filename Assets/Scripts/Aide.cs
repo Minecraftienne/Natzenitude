@@ -8,37 +8,20 @@ public class Aide : MonoBehaviour {
 	public float originalHeight = 800.0f; // you used to create the GUI contents 
 	private Vector3 scale;
 
-	// Barre de scrolling verticale
-	public float vSbarValue;
+	// Scrolling View
+	private Vector2 scrollViewVector = Vector2.zero;
 
-	private bool activeLabelBut = false;
-	private bool activeLabelArgent = false;
-	private bool activeLabelSucces = false;
-	private bool activeLabelObjectifs = false;
-	private bool activeLabelChallenges = false;
+	private bool activeLabelBut = false, activeLabelArgent = false, activeLabelSucces = false, activeLabelObjectifs = false,
+	activeLabelChallenges = false;
 
-	public bool succes365 = false;
-	public bool succesRichesse = false;
-	public bool succesTueurPlantes = false;
-	public bool succesInsectes = false;
-	public bool succcesMiniJeux = false;
-	public bool succesMalchanceux = false;
-	public bool succesTropGourmand = false;
-	public bool succesCollectionneur = false;
-	public bool succesActionReaction = false;
-	public bool succesFiasco = false;
+	// Les succès sont faux au début du jeu
+	public bool succes365 = false, succesRichesse = false, succesTueurPlantes = false, succesInsectes = false,
+	succcesMiniJeux = false, succesMalchanceux = false, succesTropGourmand = false, succesCollectionneur = false,
+	succesActionReaction = false, succesFiasco = false;
 
 	// Images des succès
-	public Texture2D miniature365;
-	public Texture2D miniatureRichesse;
-	public Texture2D miniatureTueurPlantes;
-	public Texture2D miniatureInsectes;
-	public Texture2D miniatureMiniJeux;
-	public Texture2D miniatureMalchanceux;
-	public Texture2D miniatureTropGourmand;
-	public Texture2D miniatureCollectionneur;
-	public Texture2D miniatureActionReaction;
-	public Texture2D miniatureFiasco;
+	public Texture2D miniature365, miniatureRichesse, miniatureTueurPlantes, miniatureInsectes, miniatureMiniJeux,
+	miniatureMalchanceux, miniatureTropGourmand, miniatureCollectionneur, miniatureActionReaction, miniatureFiasco;
 	#endregion
 
 	void Start() {
@@ -101,9 +84,10 @@ public class Aide : MonoBehaviour {
 
 		if (activeLabelArgent) {
 
-			GUI.Label (new Rect (450, 190, 600, 120), "Pour gagner de l'argent il faut vendre votre plante une fois qu'elle a atteint son dernier stade d'évolution. Le prix est déterminé par plusieurs critères : " +
-			"\n• la qualité => moins la plante aura subi de dommages (trop d'engrais, pas assez d'arrosage...), meilleur prix vous pourrez en tirez." +
-			"\n• la quantité => ?" +
+			GUI.Label (new Rect (450, 190, 600, 180), "Pour gagner de l'argent il faut vendre votre plante une fois qu'elle a atteint son dernier stade d'évolution." +
+			"\n\nLe prix est déterminé par plusieurs critères : " +
+			"\n\n• la qualité => moins la plante aura subi de dommages (trop d'engrais, pas assez d'arrosage...), meilleur prix vous pourrez en tirez." +
+			"\n• la quantité => correspond au rendement au m² par rapport à la puissance de lampe, plus vous produisez plus vous vendez." +
 			"\n• la rapidité => en évitant les malus et retards de croissance, et en obtenant des bonus de croissance, la plante grandira plus vite et vous gagnerez plus d'argent.");
 		}
 
@@ -128,11 +112,14 @@ public class Aide : MonoBehaviour {
 			 miniatureSucces+ "Succès " +titreSucces " réussi."
 			 imageGrisee devient imageNormale et texteGrise devient texteNormal */
 
-			vSbarValue = GUI.VerticalScrollbar(new Rect(1096, 160, 100, 500), vSbarValue, 1.0F, 10.0F, 0.0F);
+			// Début de la ScrollView
+			scrollViewVector = GUI.BeginScrollView (new Rect (0, 0, 1110, 900), scrollViewVector, new Rect (0, 0, 1000, 1400));
+
+			//vSbarValue = GUI.VerticalScrollbar(new Rect(1096, 160, 100, 500), vSbarValue, 1.0F, 10.0F, 0.0F);
 
 			// Affichage des succès (image, titre, description)
 			GUI.DrawTexture(new Rect(430, 190, 100, 100), miniature365, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (470, 180, 100, 20), "1 an");
+			GUI.Label (new Rect (460, 180, 100, 20), "1 an");
 			GUI.Label (new Rect (560, 220, 200, 20), "Atteindre 365 jours.");
 
 			GUI.DrawTexture(new Rect(430, 300, 100, 100), miniatureRichesse, ScaleMode.ScaleToFit, true);
@@ -140,15 +127,15 @@ public class Aide : MonoBehaviour {
 			GUI.Label (new Rect (560, 330, 200, 20), "Avoir 10 000 euros.");
 
 			GUI.DrawTexture(new Rect(430, 410, 100, 100), miniatureTueurPlantes, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (450, 400, 100, 20), "Tueur de plantes");
+			GUI.Label (new Rect (440, 400, 100, 20), "Tueur de plantes");
 			GUI.Label (new Rect (560, 440, 300, 20), "Tuer sa plante (peu importe la cause).");
 
 			GUI.DrawTexture(new Rect(430, 520, 100, 100), miniatureInsectes, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (440, 510, 150, 20), "La folie des insectes");
+			GUI.Label (new Rect (430, 510, 150, 20), "La folie des insectes");
 			GUI.Label (new Rect (560, 550, 400, 20), "Voir sa plante se faire attaquée par des insectes.");
 
 			GUI.DrawTexture(new Rect(430, 630, 100, 100), miniatureMiniJeux, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (470, 620, 100, 20), "Je gère");
+			GUI.Label (new Rect (460, 620, 100, 20), "Je gère");
 			GUI.Label (new Rect (560, 660, 300, 20), "Réussir tous les mini-jeux.");
 
 			GUI.DrawTexture(new Rect(430, 740, 100, 100), miniatureMalchanceux, ScaleMode.ScaleToFit, true);
@@ -168,8 +155,10 @@ public class Aide : MonoBehaviour {
 			GUI.Label (new Rect (560, 1100, 400, 20), "Résoudre en une seule journée un incident.");
 
 			GUI.DrawTexture(new Rect(430, 1180, 100, 100), miniatureFiasco, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (470, 1170, 100, 20), "Fiasco");
+			GUI.Label (new Rect (460, 1170, 100, 20), "Fiasco");
 			GUI.Label (new Rect (560, 1210, 400, 20), "Ne plus avoir d'argent ni de plante en vie.");
+
+			GUI.EndScrollView();
 
 			// Vérification pour voir si les succès ont été accomplis
 			if (Placard.jour >= 365) {
@@ -221,8 +210,8 @@ public class Aide : MonoBehaviour {
 		if (activeLabelObjectifs) {
 
 			GUI.Label (new Rect (450, 190, 600, 50), "Les objectifs journaliers sont facultatifs mais sachez que si vous les accomplissez," +
-		    "la plante obtient un bonus de croissance le lendemain, tandis que si vous ne les réalisez pas," +
-		    "la plante peut obtenir un malus de croissance le lendemain.");
+		    " la plante obtient un bonus de croissance le lendemain, tandis que si vous ne les réalisez pas," +
+		    " la plante peut obtenir un malus de croissance le lendemain.");
 		}
 
 		if (GUI.Button (new Rect (250, 350, 120, 30), "Challenges")) {
@@ -237,9 +226,9 @@ public class Aide : MonoBehaviour {
 		if (activeLabelChallenges) {
 
 			GUI.Label (new Rect (450, 190, 600, 80), "Ce sont des opportunités qui apparaissent aléatoirement dans la petite fenêtre de la boutique." +
-			"Un vendeur apparaît dans le cadre et vous propose un mini-jeu que vous êtes libre d'accepter ou de refuser." +
-			"Si vous réussissez le mini-jeu, le vendeur peut soit vous faire une remise sur un objet de la boutique au choix," +
-	        "soit vous donnez de l'argent, ou soit vous offrir un objet de la boutique au hasard, c'est aléatoire.");
+			" Un vendeur apparaît dans le cadre et vous propose un mini-jeu que vous êtes libre d'accepter ou de refuser." +
+			" Si vous réussissez le mini-jeu, le vendeur peut soit vous faire une remise sur un objet de la boutique au choix," +
+	        " soit vous donnez de l'argent, ou soit vous offrir un objet de la boutique au hasard, c'est aléatoire.");
 		}
 		
 		if (GUI.Button(new Rect(250, 610, 120, 30), "Retour")) {

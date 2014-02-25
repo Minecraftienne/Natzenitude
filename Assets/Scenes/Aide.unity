@@ -188,7 +188,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalWidth: 1280
   originalHeight: 800
-  vSbarValue: 0
   succes365: 0
   succesRichesse: 0
   succesTueurPlantes: 0
