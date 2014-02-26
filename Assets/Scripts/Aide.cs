@@ -22,6 +22,9 @@ public class Aide : MonoBehaviour {
 	// Images des succès
 	public Texture2D miniature365, miniatureRichesse, miniatureTueurPlantes, miniatureInsectes, miniatureMiniJeux,
 	miniatureMalchanceux, miniatureTropGourmand, miniatureCollectionneur, miniatureActionReaction, miniatureFiasco;
+
+	// Son
+	public AudioClip succesReussi;
 	#endregion
 
 	void Start() {
@@ -33,10 +36,6 @@ public class Aide : MonoBehaviour {
 	void Update() {
 
 	}
-
-/*	void AfficherSucces() {
-
-	}*/
 	
 	void OnGUI() {
 		
@@ -102,20 +101,9 @@ public class Aide : MonoBehaviour {
 		}
 
 		if (activeLabelSucces) {
-			
-			/* Algorithme succès : ex 365 jours
-			 SI le joueur est au jour >= 365, alors succes365 = vrai
-			 SI succes365 == vrai, alors fonction AfficherSucces
-
-			 fonction AfficherSucces(texture2D, string)
-			 afficher fenetre en haut de l'écran (genre succes steam) avec écrit
-			 miniatureSucces+ "Succès " +titreSucces " réussi."
-			 imageGrisee devient imageNormale et texteGrise devient texteNormal */
 
 			// Début de la ScrollView
 			scrollViewVector = GUI.BeginScrollView (new Rect (0, 0, 1110, 900), scrollViewVector, new Rect (0, 0, 1000, 1400));
-
-			//vSbarValue = GUI.VerticalScrollbar(new Rect(1096, 160, 100, 500), vSbarValue, 1.0F, 10.0F, 0.0F);
 
 			// Affichage des succès (image, titre, description)
 			GUI.DrawTexture(new Rect(430, 190, 100, 100), miniature365, ScaleMode.ScaleToFit, true);
@@ -164,15 +152,19 @@ public class Aide : MonoBehaviour {
 			if (Placard.jour >= 365) {
 
 				succes365 = true;
-		//		AfficherSucces();
-		//		GUI.Window (1, new Rect (250, 0, 200, 50), GUI.WindowFunction, "Succès");
-				GUI.DrawTexture(new Rect(300, 0, 100, 100), miniature365, ScaleMode.ScaleToFit, true);
-				GUI.Label (new Rect (350, 0, 200, 20), "Succès 1 an réussi");
+				audio.PlayOneShot(succesReussi);
+				GUI.Box (new Rect (490, 10, 250, 80), "");
+				GUI.DrawTexture(new Rect(500, 0, 100, 100), miniature365, ScaleMode.ScaleToFit, true);
+				GUI.Label (new Rect (610, 40, 200, 20), "Succès 1 an réussi");
 			}
 
 			if (Boutique.argent >= 10000) {
 
 				succesRichesse = true;
+				audio.PlayOneShot(succesReussi);
+				GUI.Box (new Rect (490, 10, 250, 80), "");
+				GUI.DrawTexture(new Rect(500, 0, 100, 100), miniatureRichesse, ScaleMode.ScaleToFit, true);
+				GUI.Label (new Rect (610, 40, 200, 20), "Succès Richesse réussi");
 			}
 
 		/* if (Plante.etat.morte == true), alors succesTueurPlantes = true;
