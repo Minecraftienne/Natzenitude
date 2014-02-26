@@ -54,6 +54,7 @@ public class MiniJeuNatzenEvolution : MonoBehaviour {
 		nbEvolution = 10;
 		plantEvolution = new SpriteRenderer[nbEvolution];
 		flowerPot = Instantiate(flowerPot, new Vector3(0, -2.5f, 0), Quaternion.Euler(0, 0, 0)) as SpriteRenderer;
+
 	}
 
 	// Update is called once per frame
