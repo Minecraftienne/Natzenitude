@@ -2,8 +2,7 @@
 using System.Collections;
 
 public class Placard : MonoBehaviour {
-
-		
+	
 	public static int jour;
 	private Vector3 scale;
 	public float originalWidth;  // define here the original resolution
