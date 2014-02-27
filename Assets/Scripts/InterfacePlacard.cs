@@ -18,11 +18,19 @@ public class InterfacePlacard : MonoBehaviour {
 	private Plante _plante; // Script plante
 	#endregion
 	#region Proprietes
-	public enum Menu // Enumération des 3 Menus Principaux
+	public enum Menu // Enumération des Menus Principaux
 	{
-		Main, // Le Menu qui contient tout les "sous-menus" Mes notes, réglage etc...
-		Placard, // Placard
-		Store // La boutique
+		Placard, 
+		Store, 
+		MyNote,
+		Settings,
+		Size,
+		Materials,
+		Products,
+		Helps,
+		Notifications,
+		Options, 
+		Quit
 	}
 
 	#endregion
@@ -53,6 +61,7 @@ public class InterfacePlacard : MonoBehaviour {
 	void OnGUI ()
 	{
 		GUI.skin = myGUISkin; // Utilise un GUI personalisé
+		GUIStyle labelDay = myGUISkin.GetStyle("LabelJour");
 
 		_scale.x = Screen.width/_originalWidth; // Calcule la taille horizontale
 		_scale.y = Screen.height/_originalHeight; // Calcule la taille verticale
@@ -64,61 +73,67 @@ public class InterfacePlacard : MonoBehaviour {
 
 		switch(_currentMenu) // Switch la page courante et affiche la bonne page
 		{
-			case Menu.Main: MainMenu(); break; // Lance la Méthode MainMenu
 			case Menu.Placard: PlacardMenu(); break; // Lance la Methode PlacardMenu
 			case Menu.Store: StoreMenu(); break; // Lance la Methode StoreMenu
+			case Menu.MyNote: MyNote(); break;
 		
 		}
 
 		if(_day <= 1) // Si _day est inférieur ou égal à 1 Jour sans "s", sinon avec
-			GUI.Box(new Rect(0, 0, _originalWidth, 50), "Jour : " + _day); 
+			GUI.Label(new Rect((50.0f/100) * _originalWidth - 150, (5.0f/100) * _originalHeight - 25, 300, 50), "Jour : " + _day, labelDay); 
 		else
-			GUI.Box(new Rect(0, 0, _originalWidth, 50), "Jours : " + _day); 
+			GUI.Label(new Rect((50.0f/100) * _originalWidth - 150, (5.0f/100) * _originalHeight - 25, 300, 50), "Jours : " + _day, labelDay); 
 
 		GUI.matrix = currentMatrix;
 	}
 
 	void PlacardMenu ()
 	{
+		#region Recuperation des customs style
 		GUIStyle pauseStyle = myGUISkin.GetStyle("Pause"); // Récupère le custom style du GUISkin nommé Pause
-		GUIStyle playStyle = myGUISkin.GetStyle("Lecture"); // Récupère le custom style du GUISkin nommé Lecture
-		GUIStyle stepForwardStyle = myGUISkin.GetStyle("Accelerer"); // Récupère le custom style du GUISkin nommé Accelerer
-
+		GUIStyle playStyle = myGUISkin.GetStyle("Lecture"); 
+		GUIStyle stepForwardStyle = myGUISkin.GetStyle("Accelerer"); 
+		GUIStyle storeButtonStyle = myGUISkin.GetStyle("Boutique");
+		GUIStyle labelBold = myGUISkin.GetStyle("LabelBold");
+		#endregion
 		#region Play, Pause, Accelerer,
-		GUI.BeginGroup(new Rect(5, (92.0f/100) * _originalHeight, 220, 50)); // Créer un groupe de GUI
+		GUI.BeginGroup(new Rect((52.0f/100) * _originalWidth, (92.0f/100) * _originalHeight, 220, 60)); // Créer un groupe de GUI
 
-		_pauseTime = GUI.Toggle(new Rect(10, 0, 40, 40), _pauseTime, "", pauseStyle); // Si j'appuis sur pause, le timer s'arrette, les jours augmentent plus
+		_pauseTime = GUI.Toggle(new Rect(10, 0, 50, 50), _pauseTime, "", pauseStyle); // Si j'appuis sur pause, le timer s'arrette, les jours augmentent plus
 		
-		if(GUI.Button(new Rect(60, 0, 40, 40), "", playStyle)) // Si j'appuis sur Lecture et que le jeu est en pause alors le jeu reprends, les jours augmentent
+		if(GUI.Button(new Rect(70, 0, 50, 50), "", playStyle)) // Si j'appuis sur Lecture et que le jeu est en pause alors le jeu reprends, les jours augmentent
 		{
 			if(_pauseTime)
 				_pauseTime = false;
 		}
 
-		if(GUI.Button(new Rect(110, 0, 40, 40), "", stepForwardStyle)) // Si j'appuis sur accelerer _day augmente de 1
+		if(GUI.Button(new Rect(130, 0, 50, 50), "", stepForwardStyle)) // Si j'appuis sur accelerer _day augmente de 1
 		   _day++;
 
 		GUI.EndGroup(); // Fin du groupe
 		#endregion
 
 
-		if(GUI.Button(new Rect((95.0f/100) * _originalWidth - 60, (50.0f/100) * _originalHeight - 25, 120, 50), "Boutique"))
+		if(GUI.Button(new Rect((94.0f/100) * _originalWidth - 65, (52.0f/100) * _originalHeight - 30, 130, 60), "", storeButtonStyle))
 		{
 			_currentMenu = Menu.Store;
 		}
-		if(GUI.Button(new Rect((5.0f/100) * _originalWidth - 60, (50.0f/100) * _originalHeight - 25, 120, 50),"Menu"))
+		/*if(GUI.Button(new Rect((5.0f/100) * _originalWidth - 60, (50.0f/100) * _originalHeight - 25, 120, 50),"Menu"))
 		{
 			_currentMenu = Menu.Main;
-		}
+		}*/
 
+		GUI.BeginGroup(new Rect(105, (21.0f/100) * _originalHeight, 450, 610), "");
+		GUI.Label(new Rect(75, 7, 300, 50), "Carnet de note", labelBold);
+		GUI.EndGroup();
 	}
 
-	void MainMenu ()
+	void StoreMenu () 
 	{
 
 	}
 
-	void StoreMenu () 
+	void MyNote ()
 	{
 
 	}
