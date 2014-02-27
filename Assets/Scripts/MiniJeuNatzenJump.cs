@@ -4,14 +4,19 @@ using System.Collections;
 public class MiniJeuNatzenJump : MonoBehaviour {
 
 	#region Variables
-	public SpriteRenderer plateformeBlanche;
 	public SpriteRenderer natzen; // personnage
+	//public GameObject natzen;
+
+	public GameObject plateformeBlancheTest;
 
 	public GUIText tempsTexte;
 
 	private float _temps;
+	private float _randomPositionX;
+	private float _randomPositionY;
 
 	private int _vitesse;
+	private int _nbPlateformes;
 	#endregion
 
 	#region Variables Saut
@@ -54,15 +59,19 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 		_temps = 30.0F;
 		_vitesse = 10;
+		_nbPlateformes = 0;
 
 		_vectorJump = CalcVectorUp(_forceJump);
 
 		InitNatzen();
-		GenererPlateformes();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+		//GenererPlateformes();
+		_randomPositionX = Random.Range (-4.0F, 4.0F);
+		_randomPositionY = Random.Range (3.0F, 4.0F);
 
 		AfficherTemps();
 		Deplacement();
@@ -112,19 +121,35 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 	void InitNatzen ()
 	{
-		natzen = Instantiate(natzen, new Vector3(0, -2.5f, 0), Quaternion.Euler(0, 0, 0)) as SpriteRenderer;
-	}
+		natzen = Instantiate(natzen, new Vector3(0, -2, 0), Quaternion.Euler(0, 0, 0)) as SpriteRenderer;
+		//Instantiate(natzen, new Vector3(0, -2, 0), Quaternion.Euler(0, 0, 0));
 
-	#region Plateformes
-	void GenererPlateformes () {
-
-		// positions aléatoires en x
-		// incrément aléatoire en y
+		Instantiate (plateformeBlancheTest, new Vector3 (-4, 0, 0), Quaternion.Euler (0, 0, 0));
+		Instantiate (plateformeBlancheTest, new Vector3 (-3, 3, 0), Quaternion.Euler (0, 0, 0));
 	}
-	#endregion
+	
+	/*void GenererPlateformes () { // positions aléatoires en x + incrément aléatoire en y
+
+		for (_nbPlateformes = 0; _nbPlateformes < 11; _nbPlateformes++) {
+
+			plateformeBlanche = Instantiate (plateformeBlanche, new Vector3 (_randomPositionX, _randomPositionY, 0), Quaternion.Euler (0, 0, 0)) as SpriteRenderer;
+
+			if (_nbPlateformes > 10)
+				break;
+		}
+
+	}*/
+
+	/*
+	 * void DestructionPlateformes ()
+	 * Si le joueur saute sur une plateforme, alors elle est détruite
+	 * Destroyable = GameObject.FindGameObjectsWithTag("Plateforme");
+	 * et il rebondit à nouveau
+	 *
+	 */
 
 	#region Temps
-	// affiche un chrono en haut à gauche qui commence à 30 secondes
+	// affiche un chrono en haut qui commence à 30 secondes
 	void AfficherTemps () {
 
 		tempsTexte.text = "Temps : " + Mathf.Floor(_temps);
@@ -160,15 +185,11 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	 * conditions de victoires : chrono à 0 + joueur en vie
 	 * collisions uniquement en phase de chute -> pour rebondir, acquérir un bonus, tomber (monstre) ou perdre
 	 * 
-	 * 5 types de plateformes
-	 * Bleu clair : Plateformes faisant des aller-retours horizontaux a vitesse constante.
-	 * Bleu gris : Plateformes faisant des aller-retours verticaux a vitesse constante.
-	 * Marron : Ces plateformes se cassent si le personnage saute dessus.
-	 * Jaune : Apres quelques secondes, ces plateformes deviennent rouge, puis explosent.
+	 * 1 type de plateforme
 	 * Blanc : Ces plateformes disparaissent apres que le personnage ait saute dessus.
 	 * 
 	 * FACULTATIF ou à rajouter en mise à jour
 	 * bonus : ressort, fusée
 	 * monstres
-	 * */
+	 */
 }
