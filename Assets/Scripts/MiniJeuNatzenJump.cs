@@ -30,7 +30,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	}
 
 	[SerializeField]
-	private float _forceJump = 1500f; // Force à appliquer à Natzen
+	private float _forceJump = 10f; // Force à appliquer à Natzen
 	private Vector2 _vectorJump; // Vecteur de force à appliquer à Natzen
 	private StateNatzen _state; // Etat de Natzen
 	
@@ -56,14 +56,14 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		InitNatzen();
 		_temps = 30.0F;
 		_vitesse = 10;
 		_nbPlateformes = 0;
 
 		_vectorJump = CalcVectorUp(_forceJump);
 
-		InitNatzen();
+
 	}
 	
 	// Update is called once per frame
@@ -100,7 +100,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	{
 		if (_state == StateNatzen.IsWaitJump)
 		{
-			rigidbody2D.AddForce(new Vector2(0f, ForceJump));
+			natzen.rigidbody2D.AddForce(new Vector2(0f, ForceJump));
 			_state = StateNatzen.IsJump;
 		}
 	}
