@@ -5,9 +5,9 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 	#region Variables
 	public SpriteRenderer natzen; // personnage
-	//public GameObject natzen;
 
-	public GameObject plateformeBlancheTest;
+	public GameObject background;
+	public GameObject plateformeBlanche;
 
 	public GUIText tempsTexte;
 
@@ -30,7 +30,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	}
 
 	[SerializeField]
-	private float _forceJump = 10f; // Force à appliquer à Natzen
+	private float _forceJump = 750f; // Force à appliquer à Natzen
 	private Vector2 _vectorJump; // Vecteur de force à appliquer à Natzen
 	private StateNatzen _state; // Etat de Natzen
 	
@@ -56,14 +56,14 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
 		InitNatzen();
+
 		_temps = 30.0F;
 		_vitesse = 10;
 		_nbPlateformes = 0;
 
 		_vectorJump = CalcVectorUp(_forceJump);
-
-
 	}
 	
 	// Update is called once per frame
@@ -80,7 +80,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 			case StateNatzen.IsGround:
 				Debug.Log("Natzen au sol");
-				if (Input.GetKeyDown(KeyCode.Space))
+				//if (Input.GetKeyDown(KeyCode.Space))
 					_state = StateNatzen.IsWaitJump;
 				break;
 			case StateNatzen.IsWaitJump:
@@ -108,8 +108,19 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	// Natzen entre en collision avec une plateforme
 	void OnCollisionEnter2D(Collision2D collider)
 	{
+		if (natzen.transform.position.y > 0) {
+			
+			natzen.collider.isTrigger = true;
+		}
+		
+		if (natzen.transform.position.y < 0) {
+			
+			natzen.collider.isTrigger = false;
+		}
+
 		if (collider.gameObject.tag == "Plateforme")
-			_state = StateNatzen.IsGround;
+			//_state = StateNatzen.IsGround;
+			_state = StateNatzen.IsWaitJump;
 	}
 	
 	// Natzen quitte le contact avec une plateforme
@@ -121,11 +132,10 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 	void InitNatzen ()
 	{
-		natzen = Instantiate(natzen, new Vector3(0, -2, 0), Quaternion.Euler(0, 0, 0)) as SpriteRenderer;
-		//Instantiate(natzen, new Vector3(0, -2, 0), Quaternion.Euler(0, 0, 0));
+		natzen = Instantiate(natzen, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as SpriteRenderer;
 
-		Instantiate (plateformeBlancheTest, new Vector3 (-4, 0, 0), Quaternion.Euler (0, 0, 0));
-		Instantiate (plateformeBlancheTest, new Vector3 (-3, 3, 0), Quaternion.Euler (0, 0, 0));
+		Instantiate (plateformeBlanche, new Vector3 (-4, 0, 0), Quaternion.Euler (0, 0, 0));
+		Instantiate (plateformeBlanche, new Vector3 (-3, 3, 0), Quaternion.Euler (0, 0, 0));
 	}
 	
 	/*void GenererPlateformes () { // positions aléatoires en x + incrément aléatoire en y
