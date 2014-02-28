@@ -102,6 +102,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 		{
 			natzen.rigidbody2D.AddForce(new Vector2(0f, ForceJump));
 			_state = StateNatzen.IsJump;
+
 		}
 	}
 	

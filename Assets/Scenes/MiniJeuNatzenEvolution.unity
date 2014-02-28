@@ -126,57 +126,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!1 &783151001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 783151003}
-  - 114: {fileID: 783151002}
-  m_Layer: 0
-  m_Name: Scripts
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &783151002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 783151001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a60dd5d85d8360842ae62afce6c645e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  plantEvolution: []
-  waterDrops: []
-  otherItems: []
-  spawnItems:
-  - {fileID: 161182387}
-  - {fileID: 1842045065}
-  - {fileID: 398606262}
-  - {fileID: 1994796230}
-  nbEvolution: 0
-  flowerPot: {fileID: 21200000, guid: 0e9b0d64065366048bdda6cff251e6c5, type: 2}
-  waterDrop: {fileID: 21200000, guid: c1c97adc0a817a5458d41ded5bd89dcd, type: 2}
-  timeText: {fileID: 1773233710}
-  scoreText: {fileID: 1560541868}
---- !u!4 &783151003
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 783151001}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.68994236, y: -.615472972, z: 7.65527344}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
 --- !u!1 &1560541867
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +188,7 @@ GameObject:
   - 92: {fileID: 1611740979}
   - 124: {fileID: 1611740978}
   - 81: {fileID: 1611740977}
+  - 114: {fileID: 1611740982}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -307,6 +257,31 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1611740982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1611740976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a60dd5d85d8360842ae62afce6c645e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterDrops:
+  - {fileID: 21200000, guid: db5b2f0af12def64c8d0652a6a0c37b5, type: 2}
+  - {fileID: 21200000, guid: c37a9ab296724e241b100ee53f03d1fb, type: 2}
+  - {fileID: 21200000, guid: c1c97adc0a817a5458d41ded5bd89dcd, type: 2}
+  spawnItems:
+  - {fileID: 161182387}
+  - {fileID: 1842045065}
+  - {fileID: 398606262}
+  - {fileID: 1994796230}
+  nbEvolution: 0
+  score: 0
+  flowerPot: {fileID: 21200000, guid: 0e9b0d64065366048bdda6cff251e6c5, type: 2}
+  timeText: {fileID: 1773233710}
+  scoreText: {fileID: 1560541868}
 --- !u!1 &1773233709
 GameObject:
   m_ObjectHideFlags: 0
