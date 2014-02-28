@@ -1,32 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MiniJeuNatzenEvolution : MonoBehaviour {
+public class ManagerNatzenEvolution : MonoBehaviour {
 	#region Attributs
-	public SpriteRenderer[] plantEvolution; // Contient toute les textures de la plante
+	//public SpriteRenderer[] plantEvolution; // Contient toute les textures de la plante
 	public SpriteRenderer[] waterDrops; // Contient les différents types de gouttes d'eau
-	public SpriteRenderer[] otherItems; // Contient les différents obstacle à éviter
+	//public SpriteRenderer[] otherItems; // Contient les différents obstacle à éviter
 
 	public Transform[] spawnItems; // Spawner
 
 	public int nbEvolution; // Nombre de texture que contiendra le tableau d'évolution de la plante
+	public int score; // Score du joueur !!! NE PAS MODIFIER DANS L'INSPECTOR !!!
 
 	public SpriteRenderer flowerPot; // Pot de fleur
-	public SpriteRenderer waterDrop; // Goutte d'eau
+	//public SpriteRenderer waterDrop; // Goutte d'eau
 
 	public GUIText timeText;
 	public GUIText scoreText;
 
-	private int _score; // Score du joueur
-	private int _speed; // Vitesse de déplacement du pot de fleur
-
-	private int WaterDropSmall = 10;
-	private int WaterDropMiddle = 20;
-	private int WaterDropBig = 40;
-
 	private float _time; // Chrono du jeu
 	private float _spawnerTime; // Chrono du spawner
 	private float _waitTimeForSpawn; // Temps d'attente pour spawn une goutte
+	
 	private bool _canSpawn = false;
 
 	#endregion 
@@ -39,20 +34,19 @@ public class MiniJeuNatzenEvolution : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		_score = 0;
-		_speed = 8;
+		score = 0;
 		_time = 30.0f;
 		_spawnerTime = 0.0f;
 		_waitTimeForSpawn = 1.0f;
 
 		InitPlant();
-		//InitWaterDrop();
+
 	}
 
 	void InitPlant ()
 	{
 		nbEvolution = 10;
-		plantEvolution = new SpriteRenderer[nbEvolution];
+		//plantEvolution = new SpriteRenderer[nbEvolution];
 		flowerPot = Instantiate(flowerPot, new Vector3(0, -2.5f, 0), Quaternion.Euler(0, 0, 0)) as SpriteRenderer;
 
 	}
@@ -61,7 +55,8 @@ public class MiniJeuNatzenEvolution : MonoBehaviour {
 	void Update () 
 	{
 		DisplayText();
-		Move();
+
+		_time -= Time.deltaTime;
 
 		if(!_canSpawn && _time > 0)
 			_spawnerTime += Time.deltaTime;
@@ -76,6 +71,7 @@ public class MiniJeuNatzenEvolution : MonoBehaviour {
 			_time = 0;
 		}
 
+		#region Reduction du temps de spawn des gouttes
 		if(_time > 15 && _time <= 20)
 		{
 			_waitTimeForSpawn = .6f;
@@ -88,28 +84,16 @@ public class MiniJeuNatzenEvolution : MonoBehaviour {
 		{
 			_waitTimeForSpawn = .1f;
 		}
+		#endregion
 
 	}
 
 	void DisplayText ()
 	{
-		scoreText.text = "Score : " + _score;
+		scoreText.text = "Score : " + score;
+
 		timeText.text = "Temps : " + Mathf.Floor(_time);
 
-		_time -= Time.deltaTime;
-
-	}
-
-	void Move ()
-	{
-		if(Input.GetKey(KeyCode.LeftArrow))
-		{
-			flowerPot.transform.Translate(new Vector2(-_speed, 0) * Time.deltaTime);
-		}
-		else if(Input.GetKey(KeyCode.RightArrow))
-		{
-			flowerPot.transform.Translate(new Vector2(_speed, 0) * Time.deltaTime);
-		}
 	}
 
 	IEnumerator SpawningObject ()
@@ -137,20 +121,36 @@ public class MiniJeuNatzenEvolution : MonoBehaviour {
 			location = spawnItems[3];
 		}
 
-		var clone = Instantiate(waterDrop, location.position, location.rotation) as SpriteRenderer;
-		clone.name = "GoutteDeau";
-		clone.sortingOrder = -1;
-
+		int rdmSize = Random.Range(1, 4);
+		SpawnWaterDrop(rdmSize, location);
 
 		yield return new WaitForSeconds(.5f);
 
 		_canSpawn = false;
 	}
-	void OnTriggerEnter2D (Collider2D other)
+
+	void SpawnWaterDrop (int size, Transform location)
 	{
-		if(other.collider2D.tag == "Player")
-			Destroy(other.gameObject);
-		
+		if(size == 1)
+		{
+			var clone = Instantiate(waterDrops[0], location.position, location.rotation) as SpriteRenderer;
+			clone.name = "GoutteDeauT1";
+			clone.sortingOrder = -1;
+		}
+		else if(size == 2)
+		{
+			var clone = Instantiate(waterDrops[1], location.position, location.rotation) as SpriteRenderer;
+			clone.name = "GoutteDeauT2";
+			clone.sortingOrder = -1;
+		}
+		else if(size == 3)
+		{
+			var clone = Instantiate(waterDrops[2], location.position, location.rotation) as SpriteRenderer;
+			clone.name = "GoutteDeauT3";
+			clone.sortingOrder = -1;
+		}
+
 	}
+
 	#endregion 
 }
