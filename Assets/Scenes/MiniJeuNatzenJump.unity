@@ -225,7 +225,7 @@ MonoBehaviour:
   background: {fileID: 406658344}
   plateformeBlanche: {fileID: 100000, guid: 36dfb543dc87424479ed3b7ae7016cbb, type: 2}
   tempsTexte: {fileID: 629224932}
-  _forceJump: 750
+  _forceJump: 350
 --- !u!4 &1170648150
 Transform:
   m_ObjectHideFlags: 0

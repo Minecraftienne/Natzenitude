@@ -30,7 +30,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	}
 
 	[SerializeField]
-	private float _forceJump = 750f; // Force à appliquer à Natzen
+	private float _forceJump = 350f; // Force à appliquer à Natzen
 	private Vector2 _vectorJump; // Vecteur de force à appliquer à Natzen
 	private StateNatzen _state; // Etat de Natzen
 	
@@ -109,18 +109,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	// Natzen entre en collision avec une plateforme
 	void OnCollisionEnter2D(Collision2D collider)
 	{
-		if (natzen.transform.position.y > 0) {
-			
-			natzen.collider.isTrigger = true;
-		}
-		
-		if (natzen.transform.position.y < 0) {
-			
-			natzen.collider.isTrigger = false;
-		}
-
 		if (collider.gameObject.tag == "Plateforme")
-			//_state = StateNatzen.IsGround;
 			_state = StateNatzen.IsWaitJump;
 	}
 	

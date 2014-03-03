@@ -11,8 +11,9 @@ GameObject:
   - 61: {fileID: 6100000}
   - 212: {fileID: 21200000}
   - 50: {fileID: 5000000}
-  m_Layer: 0
-  m_Name: Pot 1
+  - 114: {fileID: 11400000}
+  m_Layer: 8
+  m_Name: Natzen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55,6 +56,17 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_Size: {x: 2.24000001, y: .239999995}
   m_Center: {x: 0, y: -.949999988}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25eb4d4bea8ccac4fb12012de9453429, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -76,7 +88,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortingLayerID: 0
-  m_Sprite: {fileID: 21300000, guid: f4ddfe4d75faaf4448ec548aafa11641, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90b8aaf5a98bae24fa3856871563df16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
