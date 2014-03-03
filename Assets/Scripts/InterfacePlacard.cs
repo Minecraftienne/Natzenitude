@@ -95,6 +95,17 @@ public class InterfacePlacard : MonoBehaviour {
 		GUIStyle stepForwardStyle = myGUISkin.GetStyle("Accelerer"); 
 		GUIStyle storeButtonStyle = myGUISkin.GetStyle("Boutique");
 		GUIStyle labelBold = myGUISkin.GetStyle("LabelBold");
+		GUIStyle darkLabel = myGUISkin.GetStyle("DarkLabel");
+
+		GUIStyle myNotes = myGUISkin.GetStyle("MesNotes");
+		GUIStyle settings = myGUISkin.GetStyle("Reglages");
+		GUIStyle size = myGUISkin.GetStyle("Taille");
+		GUIStyle material = myGUISkin.GetStyle("Materiel");
+		GUIStyle products = myGUISkin.GetStyle("Produits");
+		GUIStyle help = myGUISkin.GetStyle("Aide");
+		GUIStyle notif = myGUISkin.GetStyle("Notifications");
+		GUIStyle options = myGUISkin.GetStyle("Options");
+		GUIStyle quit = myGUISkin.GetStyle("Quitter");
 		#endregion
 		#region Play, Pause, Accelerer,
 		GUI.BeginGroup(new Rect((52.0f/100) * _originalWidth, (92.0f/100) * _originalHeight, 220, 60)); // Créer un groupe de GUI
@@ -123,8 +134,26 @@ public class InterfacePlacard : MonoBehaviour {
 			_currentMenu = Menu.Main;
 		}*/
 
-		GUI.BeginGroup(new Rect(105, (21.0f/100) * _originalHeight, 450, 610), "");
-		GUI.Label(new Rect(75, 7, 300, 50), "Carnet de note", labelBold);
+		GUI.BeginGroup(new Rect(105, (20.0f/100) * _originalHeight, 450, 610), "");
+		GUI.Label(new Rect(75, 7, 300, 50), "Carnet de notes", labelBold);
+
+		GUI.Label(new Rect(225 - 70, 60, 150, 50), "ENTRETIEN", darkLabel);
+
+		GUI.Button(new Rect(225 - 175, 110, 350, 35), "Mes notes", myNotes);
+		GUI.Button(new Rect(225 - 175, 150, 350, 35), "Réglages", settings);
+		GUI.Button(new Rect(225 - 175, 190, 350, 35), "Taille", size);
+
+		GUI.Label(new Rect(225 - 75, 240, 150, 50), "STOCK", darkLabel);
+
+		GUI.Button(new Rect(225 - 175, 290, 350, 35), "Materiel", material);
+		GUI.Button(new Rect(225 - 175, 330, 350, 35), "Produits", products);
+
+		GUI.Label(new Rect(225 - 75, 385, 150, 50), "AUTRE", darkLabel);
+
+		GUI.Button(new Rect(225 - 175, 430, 350, 35), "Aide", help);
+		GUI.Button(new Rect(225 - 175, 470, 350, 35), "Notifications", notif);
+		GUI.Button(new Rect(225 - 75, 515, 150, 35), "Options", options);
+		GUI.Button(new Rect(225 - 83, 570, 165, 35), "Quitter", quit);
 		GUI.EndGroup();
 	}
 
