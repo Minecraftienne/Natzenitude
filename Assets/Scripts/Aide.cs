@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Aide : MonoBehaviour {
 
@@ -8,16 +9,24 @@ public class Aide : MonoBehaviour {
 	public float originalHeight = 800.0f; // you used to create the GUI contents 
 	private Vector3 scale;
 
+	// Liste des succès
+	public List<Succes> listeSucces;
+	int nombreSucces;
+	int total;
+	
 	// Scrolling View
 	private Vector2 scrollViewVector = Vector2.zero;
 
+	// Labels
 	private bool activeLabelBut = false, activeLabelArgent = false, activeLabelSucces = false, activeLabelObjectifs = false,
 	activeLabelChallenges = false;
 
 	// Les succès sont faux au début du jeu
-	public bool succes365 = false, succesRichesse = false, succesTueurPlantes = false, succesInsectes = false,
-	succcesMiniJeux = false, succesMalchanceux = false, succesTropGourmand = false, succesCollectionneur = false,
-	succesActionReaction = false, succesFiasco = false;
+	public bool succes365 = false, succesTueurPlantes = false, succesInsectes = false, succcesMiniJeux = false,
+	succesMalchanceux = false, succesTropGourmand = false, succesCollectionneur = false, succesActionReaction = false,
+	succesFiasco = false;
+
+	public static bool succesRichesse = false;
 
 	// Images des succès
 	public Texture2D miniature365, miniatureRichesse, miniatureTueurPlantes, miniatureInsectes, miniatureMiniJeux,
@@ -28,13 +37,44 @@ public class Aide : MonoBehaviour {
 	#endregion
 
 	void Start() {
+
 		originalWidth = 1280.0f;
 		originalHeight = 800.0f;
-	}
-	
-	// Update is called once per frame
-	void Update() {
 
+		listeSucces = new List<Succes>();
+
+		Succes succes365 = new Succes ("1 an", "Atteindre 365 jours.", miniature365);
+		listeSucces.Add (succes365);
+
+		Succes succesRichesse = new Succes ("Richesse", "Avoir 10 000 euros.", miniatureRichesse);
+		listeSucces.Add (succesRichesse);
+
+		Succes succesTueurPlantes = new Succes ("Tueur de plantes", "Tuer sa plante (peu importe la cause).", miniatureTueurPlantes);
+		listeSucces.Add (succesTueurPlantes);
+
+		Succes succesInsectes = new Succes ("La folie des insectes", "Voir sa plante se faire attaquée par des insectes.", miniatureInsectes);
+		listeSucces.Add (succesInsectes);
+
+		Succes succesMiniJeux = new Succes ("Je gère", "Réussir tous les mini-jeux.", miniatureMiniJeux);
+		listeSucces.Add (succesMiniJeux);
+
+		Succes succesMalchanceux = new Succes ("Malchanceux", "En une seule partie avoir été victime de tous les incidents possibles.", miniatureMalchanceux);
+		listeSucces.Add (succesMalchanceux);
+
+		Succes succesTropGourmand = new Succes ("Trop gourmand", "Tuer sa plante en lui donnant trop d'engrais.", miniatureTropGourmand);
+		listeSucces.Add (succesTropGourmand);
+
+		Succes succesCollectionneur = new Succes ("Collectionneur", "Acheter tout ce que la boutique offre (matériel, produits...).", miniatureCollectionneur);
+		listeSucces.Add (succesCollectionneur);
+
+		Succes succesActionReaction = new Succes ("Action/Réactio", "Résoudre en une seule journée un incident.", miniatureActionReaction);
+		listeSucces.Add (succesActionReaction);
+
+		Succes succesFiasco = new Succes ("Fiasco", "Ne plus avoir d'argent ni de plante en vie.", miniatureFiasco);
+		listeSucces.Add (succesFiasco);
+
+		nombreSucces = listeSucces.Count;
+		total = listeSucces[0].heightImage * nombreSucces;
 	}
 	
 	void OnGUI() {
@@ -51,7 +91,7 @@ public class Aide : MonoBehaviour {
 		GUI.Box(new Rect(-5, 0, 1685, 50), "");
 		
 		// Jours
-		GUI.Label(new Rect(560, 100, 100, 20),"Jour : "+Placard.jour); // affiche le nombre de jours passés
+		GUI.Label(new Rect(560, 100, 100, 20),"Jour : "+GUIPlacard.jour); // affiche le nombre de jours passés
 		
 		// Menu à gauche
 		GUI.Box(new Rect(240, 160, 140, 500), "");
@@ -103,53 +143,25 @@ public class Aide : MonoBehaviour {
 		if (activeLabelSucces) {
 
 			// Début de la ScrollView
-			scrollViewVector = GUI.BeginScrollView (new Rect (0, 0, 1110, 900), scrollViewVector, new Rect (0, 0, 1000, 1400));
+			scrollViewVector = GUI.BeginScrollView(new Rect(410, 160, 700, 500), scrollViewVector, new Rect(410, 160, 700, (500 + (total))));
 
-			// Affichage des succès (image, titre, description)
-			GUI.DrawTexture(new Rect(430, 190, 100, 100), miniature365, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (460, 180, 100, 20), "1 an");
-			GUI.Label (new Rect (560, 220, 200, 20), "Atteindre 365 jours.");
+			int compteur = 0;
 
-			GUI.DrawTexture(new Rect(430, 300, 100, 100), miniatureRichesse, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (450, 290, 100, 20), "Richesse");
-			GUI.Label (new Rect (560, 330, 200, 20), "Avoir 10 000 euros.");
+			foreach (Succes s in listeSucces) {
 
-			GUI.DrawTexture(new Rect(430, 410, 100, 100), miniatureTueurPlantes, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (440, 400, 100, 20), "Tueur de plantes");
-			GUI.Label (new Rect (560, 440, 300, 20), "Tuer sa plante (peu importe la cause).");
-
-			GUI.DrawTexture(new Rect(430, 520, 100, 100), miniatureInsectes, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (430, 510, 150, 20), "La folie des insectes");
-			GUI.Label (new Rect (560, 550, 400, 20), "Voir sa plante se faire attaquée par des insectes.");
-
-			GUI.DrawTexture(new Rect(430, 630, 100, 100), miniatureMiniJeux, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (460, 620, 100, 20), "Je gère");
-			GUI.Label (new Rect (560, 660, 300, 20), "Réussir tous les mini-jeux.");
-
-			GUI.DrawTexture(new Rect(430, 740, 100, 100), miniatureMalchanceux, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (440, 730, 100, 20), "Malchanceux");
-			GUI.Label (new Rect (560, 770, 500, 20), "En une seule partie avoir été victime de tous les incidents possibles.");
-			
-			GUI.DrawTexture(new Rect(430, 850, 100, 100), miniatureTropGourmand, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (440, 840, 100, 20), "Trop gourmand");
-			GUI.Label (new Rect (560, 880, 400, 20), "Tuer sa plante en lui donnant trop d'engrais.");
-
-			GUI.DrawTexture(new Rect(430, 960, 100, 100), miniatureCollectionneur, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (440, 950, 100, 20), "Collectionneur");
-			GUI.Label (new Rect (560, 990, 500, 20), "Acheter tout ce que la boutique offre (matériel, produits...).");
-
-			GUI.DrawTexture(new Rect(430, 1070, 100, 100), miniatureActionReaction, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (440, 1060, 100, 20), "Action/Réaction");
-			GUI.Label (new Rect (560, 1100, 400, 20), "Résoudre en une seule journée un incident.");
-
-			GUI.DrawTexture(new Rect(430, 1180, 100, 100), miniatureFiasco, ScaleMode.ScaleToFit, true);
-			GUI.Label (new Rect (460, 1170, 100, 20), "Fiasco");
-			GUI.Label (new Rect (560, 1210, 400, 20), "Ne plus avoir d'argent ni de plante en vie.");
+				Debug.Log((s.widthTitre + s.widthImage + s.widthDescription));
+				GUILayout.BeginArea(new Rect(420, (160 + (10 * (compteur + 1)) + (100 * compteur)), (s.widthTitre + s.widthImage + s.widthDescription), (s.heightTitre + s.heightImage + s.heightDescription)));
+				GUI.DrawTexture(new Rect(0, 0, s.widthImage, s.heightImage), s.texture, ScaleMode.ScaleToFit, true);
+				GUI.Label(new Rect(s.widthImage + 10, 10, s.widthTitre, s.heightTitre), s.titre);
+				GUI.Label(new Rect(s.widthImage + 10, 30, s.widthDescription, s.heightDescription), s.description);
+				GUILayout.EndArea();
+				compteur++;
+			}
 
 			GUI.EndScrollView();
-
+			
 			// Vérification pour voir si les succès ont été accomplis
-			if (Placard.jour >= 365) {
+			if (GUIPlacard.jour >= 365) {
 
 				succes365 = true;
 				audio.PlayOneShot(succesReussi);
@@ -158,9 +170,8 @@ public class Aide : MonoBehaviour {
 				GUI.Label (new Rect (610, 40, 200, 20), "Succès 1 an réussi");
 			}
 
-			if (Boutique.argent >= 10000) {
+			if (succesRichesse == true) {
 
-				succesRichesse = true;
 				audio.PlayOneShot(succesReussi);
 				GUI.Box (new Rect (490, 10, 250, 80), "");
 				GUI.DrawTexture(new Rect(500, 0, 100, 100), miniatureRichesse, ScaleMode.ScaleToFit, true);
@@ -179,8 +190,7 @@ public class Aide : MonoBehaviour {
 		   type on augmente de 1, ainsi si incidentVentilation on augmente de 1 un int (compteurIncidentVentilation)
 		   si compteurIncidentVentilation >= à 1 && compteurIncidentInsectes >= 1 etc... alors le succès est vrai
 
-		   if (Plante.etat.morte == true && engraisTrop && Plante.Incidents.incidentEngrais == 1),
-		   alors succesTropGourmand = true;
+		   if (Plante.etat.morte == true && Plante.etat.engraisTrop), alors succesTropGourmand = true;
 
 		   if (?), alors succesCollectionneur = true;
 
@@ -234,5 +244,27 @@ public class Aide : MonoBehaviour {
 		// restore matrix before returning
 		GUI.matrix = svMat; // restore matrix
 	}
+}
 
+public class Succes {
+	
+	public int widthImage, heightImage, widthDescription, heightDescription, widthTitre, heightTitre;
+	public string titre;
+	public string description;
+	public Texture2D texture;
+
+	public Succes(string titre, string description, Texture2D texture) {
+
+		this.titre = titre;
+		this.description = description;
+		this.texture = texture;
+		
+		widthImage = 100;
+		heightImage = 100;
+		widthDescription = description.Length * 10;
+		Debug.Log(widthDescription);
+		heightDescription = 20;
+		widthTitre = 100;
+		heightTitre = 20;     
+	}
 }

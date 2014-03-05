@@ -31,7 +31,7 @@ public class Entretien : MonoBehaviour {
 		GUI.Box(new Rect(-5, 0, 1685, 50), "");
 		
 		// Jours
-		GUI.Label(new Rect(560, 100, 100, 20),"Jour : "+Placard.jour); // affiche le nombre de jours passés
+		GUI.Label(new Rect(560, 100, 100, 20),"Jour : "+GUIPlacard.jour); // affiche le nombre de jours passés
 		
 		// Menu à gauche
 		GUI.Box(new Rect(240, 160, 130, 500), "");

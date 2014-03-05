@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Placard : MonoBehaviour {
+public class GUIPlacard : MonoBehaviour {
 	
 	public static int jour;
 	private Vector3 scale;
