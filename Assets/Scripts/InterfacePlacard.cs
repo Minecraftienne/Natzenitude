@@ -15,7 +15,7 @@ public class InterfacePlacard : MonoBehaviour {
 	private Vector3 _scale;
 	private float _originalWidth = 1280.0f; // Taille native horizontale
 	private float _originalHeight = 800.0f; // Taille native verticale
-	private Plante _plante; // Script plante
+
 	#endregion
 	#region Proprietes
 	public enum Menu // Enumération des Menus Principaux
@@ -38,7 +38,7 @@ public class InterfacePlacard : MonoBehaviour {
 	#region Methodes
 
 	void Start () {
-		_plante = GameObject.Find("1 - Scripts middleground").GetComponent<Plante>();
+
 	}
 	
 
@@ -52,8 +52,8 @@ public class InterfacePlacard : MonoBehaviour {
 			_timer = 0;
 		}
 
-		if(_currentMenu != Menu.Placard)
-			_plante.enabled = false;
+		/*if(_currentMenu != Menu.Placard)
+			_plante.enabled = false;*/
 
 	}
 	
