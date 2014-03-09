@@ -63,7 +63,6 @@ public class Comportement : MonoBehaviour {
      * le jour global est toujours incrémenté quoiqu'il arrive
      * chaque plante a son propre nombre jour et est actulisé meme si pas focus
      * A chaque frame on vérifie que pour chacune de ses plantes si ces états sont soignés ou si la plante recoit un etat
-     * 
      * */
 
 	float countdown = 1;
@@ -199,7 +198,8 @@ public class Comportement : MonoBehaviour {
 		
 		// affichage du pot, de la plante et de la lampe
 		GUILayout.BeginArea(new Rect(550, 600 - placardHauteur, 200, placardHauteur + pot.texturePot.height));
-		
+
+		// ---------> la distance lampe-plante se gère dans la partie taille d'entretien
 		if (planteCourante != null) {
 
 			value = GUI.VerticalSlider(new Rect(180, 40, 10, (placardHauteur - planteCourante.texturePlante.height)), value, 0, (placardHauteur - planteCourante.texturePlante.height - joueur.lampe.textureLampe.height));
@@ -255,7 +255,7 @@ public class Comportement : MonoBehaviour {
 			GUILayout.EndArea();
 		}
 		
-		// changer de pot
+		// changer de pot ----> il faut que ça se gère dans la partie matériel de Stock
 		GUILayout.BeginArea(new Rect(300, 400, 150, 400));
 
 		if (GUILayout.Button("Changer de pot")) {
@@ -308,7 +308,7 @@ public class Comportement : MonoBehaviour {
 		
 		GUILayout.EndArea();
 		
-		// ajouter une graine
+		// ajouter une graine -----> il faut que ça se gère dans la partie produits de Stock
 		GUILayout.BeginArea(new Rect(750, 200, 150, 400));
 
 		// if (GUILayout.Button("Planter une graine")) { }

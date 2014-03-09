@@ -7,8 +7,9 @@ using System;
  * pour l'instant seul arroser a été implémenté et fonctionne a merveille
  * le gain d'eau peut etre modifié comme la perte d'eau peut l'etre aussi
  * */
-public class Actions {
-	
+public class Actions : MonoBehaviour {
+
+	// ------> se gère dans la partie arrosage d'entretien
 	public static void arroser(Plante plante) {
 		
 		Comportement.joueur.arrosoir.nombreUtilisation -= 1;
@@ -20,19 +21,23 @@ public class Actions {
 
 		plante.niveauEau += 50;
 	}
-	
+
+	// ------> se gère dans la partie taille d'entretien
 	public static void remplacerLampe() {
 
 	}
-	
+
+	// ------> se gère dans la partie réglages d'entretien
 	public static void remplacerVentilateur() {
 
 	}
-	
+
+	// ------> se gère dans la partie matériel de stock
 	public static void remplacerPot() {
 
 	}
-	
+
+	// ------> se gère dans la partie matériel de stock
 	public static void remplacerPlacard() {
 
 	}
@@ -70,22 +75,6 @@ public class Arrosoir {
 		else if (qualite == Qualitee.pro) {
 			nombreUtilisation = 50;
 		}
-	}
-}
-
-public class Boutique {
-
-	public Dictionary<int, int> listeLampe;
-	public Dictionary<Qualitee, int> listeArrosoir;
-	public Dictionary<Taille, int> listePot;
-	public Dictionary<string, int> listePlante;
-	
-	public Boutique() {
-
-		listeLampe = new Dictionary<int, int>();
-		listeArrosoir = new Dictionary<Qualitee, int>();
-		listePot = new Dictionary<Taille, int>();
-		listePlante = new Dictionary<string, int>();
 	}
 }
 
@@ -178,6 +167,7 @@ public class EtatArrosage : Etat {
 	}
 }
 
+// ------> se gère dans la partie produits de stock
 public class EtatEngrais : Etat {
 
 	public EtatEngrais(string nom, int min, int max) : base(nom, min, max) {

@@ -12,7 +12,7 @@ using System;
  * ensuite on fait juste une init de ca
  * */
 
-public class Joueur {
+public class Joueur : MonoBehaviour {
 
 	public string pseudo;
 	public Arrosoir arrosoir;
@@ -248,11 +248,11 @@ public class Terre {
 
 		type = new TypeTerre();
 		engrais = new Dictionary<Engrais, double>();
-		additif = new Dictionary<Additif,double>();
+		additif = new Dictionary<Additif, double>();
 	}
 }
 
-public class Engrais{
+public class Engrais {
 
 	string nom;
 	Qualitee qualite;
@@ -265,7 +265,7 @@ public class Engrais{
 	
 }
 
-public class Additif{
+public class Additif {
 
 	string nom;
 	TypeAdditif type;

@@ -162,8 +162,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 243799316}
-  - 114: {fileID: 243799315}
   - 114: {fileID: 243799317}
+  - 114: {fileID: 243799315}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -179,11 +179,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 243799314}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43885e7d2f679644ca12838709089041, type: 3}
+  m_Script: {fileID: 11500000, guid: d8412dbfe8ebb824f8a9e57203051864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalWidth: 1280
-  originalHeight: 800
+  joueur: {fileID: 0}
 --- !u!4 &243799316
 Transform:
   m_ObjectHideFlags: 0

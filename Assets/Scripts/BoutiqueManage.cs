@@ -303,3 +303,19 @@ public class BoutiqueManage : MonoBehaviour {
 			//}
 		}
 }
+
+public class Boutique {
+	
+	public Dictionary<int, int> listeLampe;
+	public Dictionary<Qualitee, int> listeArrosoir;
+	public Dictionary<Taille, int> listePot;
+	public Dictionary<string, int> listePlante;
+	
+	public Boutique() {
+		
+		listeLampe = new Dictionary<int, int>();
+		listeArrosoir = new Dictionary<Qualitee, int>();
+		listePot = new Dictionary<Taille, int>();
+		listePlante = new Dictionary<string, int>();
+	}
+}
