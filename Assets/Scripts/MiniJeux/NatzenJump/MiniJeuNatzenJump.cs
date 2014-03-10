@@ -8,7 +8,6 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 	public GameObject background;
 	public GameObject plateformeBlanche;
-	public GameObject camera;
 
 	public GUIText tempsTexte;
 
@@ -93,6 +92,11 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 				Debug.Log("Natzen est en l'air");
 				break;
 		}
+
+		Vector3 tempCamPos = this.transform.position;
+		tempCamPos.y = natzen.transform.position.y;    // Permet a la caméra de suivre le joueur
+		this.transform.position = tempCamPos;
+
 	}
 	
 	// Update moteur physique
@@ -111,7 +115,6 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	{
 		if (collider.gameObject.tag == "Plateforme") {
 			_state = StateNatzen.IsWaitJump;
-			Destroy (plateformeBlanche);
 		}
 	}
 	
@@ -120,7 +123,6 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	{
 		if (collider.gameObject.tag == "Plateforme") {
 			_state = StateNatzen.IsUp;
-			Destroy (plateformeBlanche);
 		}
 	}
 
@@ -128,10 +130,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	{
 		natzen = Instantiate(natzen, new Vector3(0, 0, 0), Quaternion.identity) as SpriteRenderer;
 
-		/*Vector2 natzenPosition = natzen.transform.position;
 
-		camera.transform.position.y = natzenPosition.y;
-		natzen.transform.position = natzenPosition;*/
 
 		Instantiate (plateformeBlanche, new Vector3 (-4, 2, 0), Quaternion.Euler (0, 0, 0));
 		Instantiate (plateformeBlanche, new Vector3 (-2, 3, 0), Quaternion.Euler (0, 0, 0));
