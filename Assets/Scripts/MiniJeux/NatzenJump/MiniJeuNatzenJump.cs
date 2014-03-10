@@ -8,6 +8,7 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 	public GameObject background;
 	public GameObject plateformeBlanche;
+	public GameObject camera;
 
 	public GUIText tempsTexte;
 
@@ -80,7 +81,6 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 
 			case StateNatzen.IsGround:
 				Debug.Log("Natzen au sol");
-				//if (Input.GetKeyDown(KeyCode.Space))
 					_state = StateNatzen.IsWaitJump;
 				break;
 			case StateNatzen.IsWaitJump:
@@ -109,23 +109,32 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 	// Natzen entre en collision avec une plateforme
 	void OnCollisionEnter2D(Collision2D collider)
 	{
-		if (collider.gameObject.tag == "Plateforme")
+		if (collider.gameObject.tag == "Plateforme") {
 			_state = StateNatzen.IsWaitJump;
+			Destroy (plateformeBlanche);
+		}
 	}
 	
 	// Natzen quitte le contact avec une plateforme
 	void OnCollisionExit2D(Collision2D collider)
 	{
-		if (collider.gameObject.tag == "Plateforme")
+		if (collider.gameObject.tag == "Plateforme") {
 			_state = StateNatzen.IsUp;
+			Destroy (plateformeBlanche);
+		}
 	}
 
 	void InitNatzen ()
 	{
-		natzen = Instantiate(natzen, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as SpriteRenderer;
+		natzen = Instantiate(natzen, new Vector3(0, 0, 0), Quaternion.identity) as SpriteRenderer;
 
-		Instantiate (plateformeBlanche, new Vector3 (-4, 0, 0), Quaternion.Euler (0, 0, 0));
-		Instantiate (plateformeBlanche, new Vector3 (-3, 3, 0), Quaternion.Euler (0, 0, 0));
+		/*Vector2 natzenPosition = natzen.transform.position;
+
+		camera.transform.position.y = natzenPosition.y;
+		natzen.transform.position = natzenPosition;*/
+
+		Instantiate (plateformeBlanche, new Vector3 (-4, 2, 0), Quaternion.Euler (0, 0, 0));
+		Instantiate (plateformeBlanche, new Vector3 (-2, 3, 0), Quaternion.Euler (0, 0, 0));
 	}
 	
 	/*void GenererPlateformes () { // positions aléatoires en x + incrément aléatoire en y
@@ -133,19 +142,16 @@ public class MiniJeuNatzenJump : MonoBehaviour {
 		for (_nbPlateformes = 0; _nbPlateformes < 11; _nbPlateformes++) {
 
 			plateformeBlanche = Instantiate (plateformeBlanche, new Vector3 (_randomPositionX, _randomPositionY, 0), Quaternion.Euler (0, 0, 0)) as SpriteRenderer;
-
-			if (_nbPlateformes > 10)
-				break;
 		}
 
 	}*/
 
 	/*
-	 * void DestructionPlateformes ()
-	 * Si le joueur saute sur une plateforme, alors elle est détruite
+	 * void DestructionPlateformes () {
+	 * if (natzen == isGrounded) { Si le joueur saute sur une plateforme, alors elle est détruite
 	 * Destroyable = GameObject.FindGameObjectsWithTag("Plateforme");
-	 * et il rebondit à nouveau
-	 *
+	 * }
+	 * }
 	 */
 
 	#region Temps

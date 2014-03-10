@@ -140,7 +140,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 406658344}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalPosition: {x: 0, y: 5, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -224,6 +224,7 @@ MonoBehaviour:
   natzen: {fileID: 21200000, guid: 134d2b610cfbe5c46b02da19ce5e1592, type: 2}
   background: {fileID: 406658344}
   plateformeBlanche: {fileID: 100000, guid: 36dfb543dc87424479ed3b7ae7016cbb, type: 2}
+  camera: {fileID: 1820788466}
   tempsTexte: {fileID: 629224932}
   _forceJump: 350
 --- !u!4 &1170648150
@@ -313,7 +314,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1820788466}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

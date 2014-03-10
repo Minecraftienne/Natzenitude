@@ -17,7 +17,7 @@ public class Natzen : MonoBehaviour {
 	}
 
 	void FixedUpdate () {
-		if (Input.GetKeyDown (KeyCode.UpArrow)) {
+		if (isGrounded == true) {
 
 			rigidbody2D.AddForce (new Vector2(0f, 500));
 			gameObject.layer = 9; //NatzenInAir Layer
