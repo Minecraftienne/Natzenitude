@@ -151,21 +151,37 @@ public class InterfacePlacard : MonoBehaviour {
 
 		GUI.Label(new Rect(225 - 70, 60, 150, 50), "ENTRETIEN", darkLabel);
 
-		GUI.Button(new Rect(225 - 175, 110, 350, 35), "Mes notes", myNotes);
-		GUI.Button(new Rect(225 - 175, 150, 350, 35), "Réglages", settings);
-		GUI.Button(new Rect(225 - 175, 190, 350, 35), "Taille", size);
+		if(GUI.Button(new Rect(225 - 175, 110, 350, 35), "Mes notes", myNotes))
+			_currentMenu = Menu.MyNote;
+
+		if(GUI.Button(new Rect(225 - 175, 150, 350, 35), "Réglages", settings))
+			_currentMenu = Menu.Settings;
+
+		if(GUI.Button(new Rect(225 - 175, 190, 350, 35), "Taille", size))
+			_currentMenu = Menu.Size;
 
 		GUI.Label(new Rect(225 - 75, 240, 150, 50), "STOCK", darkLabel);
 
-		GUI.Button(new Rect(225 - 175, 290, 350, 35), "Materiel", material);
-		GUI.Button(new Rect(225 - 175, 330, 350, 35), "Produits", products);
+		if(GUI.Button(new Rect(225 - 175, 290, 350, 35), "Materiel", material))
+			_currentMenu = Menu.Materials;
+
+		if(GUI.Button(new Rect(225 - 175, 330, 350, 35), "Produits", products))
+			_currentMenu = Menu.Products;
 
 		GUI.Label(new Rect(225 - 75, 385, 150, 50), "AUTRE", darkLabel);
 
-		GUI.Button(new Rect(225 - 175, 430, 350, 35), "Aide", help);
-		GUI.Button(new Rect(225 - 175, 470, 350, 35), "Notifications", notif);
-		GUI.Button(new Rect(225 - 75, 515, 150, 35), "Options", options);
-		GUI.Button(new Rect(225 - 83, 570, 165, 35), "Quitter", quit);
+		if(GUI.Button(new Rect(225 - 175, 430, 350, 35), "Aide", help))
+			_currentMenu = Menu.Helps;
+
+		if(GUI.Button(new Rect(225 - 175, 470, 350, 35), "Notifications", notif))
+			_currentMenu = Menu.Notifications;
+
+		if(GUI.Button(new Rect(225 - 75, 515, 150, 35), "Options", options))
+			_currentMenu = Menu.Options;
+
+		if(GUI.Button(new Rect(225 - 83, 570, 165, 35), "Quitter", quit))
+			_currentMenu = Menu.Quit;
+
 		GUI.EndGroup();
 	}
 
