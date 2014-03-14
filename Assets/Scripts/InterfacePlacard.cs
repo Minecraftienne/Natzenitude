@@ -16,6 +16,13 @@ public class InterfacePlacard : MonoBehaviour {
 	private float _originalWidth = 1280.0f; // Taille native horizontale
 	private float _originalHeight = 800.0f; // Taille native verticale
 
+	private Actions _actions;
+	private BoutiqueManage _boutique;
+	private Comportement _comportement;
+	private UltiManage _ultimanage;
+	private Joueur _joueur;
+	private Placard _placard;
+
 	#endregion
 	#region Proprietes
 	public enum Menu // Enumération des Menus Principaux
@@ -38,7 +45,12 @@ public class InterfacePlacard : MonoBehaviour {
 	#region Methodes
 
 	void Start () {
-
+		_actions = GetComponent<Actions>();
+		_boutique = GetComponent<BoutiqueManage>();
+		_comportement = GetComponent<Comportement>();
+		_ultimanage = GetComponent<UltiManage>();
+		_joueur = GetComponent<Joueur>();
+		_placard = GetComponent<Placard>();
 	}
 	
 
@@ -165,6 +177,14 @@ public class InterfacePlacard : MonoBehaviour {
 	void MyNote ()
 	{
 
+	}
+
+	void SizeMenu ()
+	{
+		if (_comportement.planteCourante != null) {
+			
+			_placard.value = GUI.VerticalSlider(new Rect(180, 40, 10, (_placard.placardHauteur - _comportement.planteCourante.texturePlante.height)), _comportement.value, 0, (_comportement.placardHauteur - _comportement.planteCourante.texturePlante.height - _comportement.joueur.lampe.textureLampe.height));
+		}
 	}
 	#endregion
 }
