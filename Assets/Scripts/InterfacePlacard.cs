@@ -199,7 +199,7 @@ public class InterfacePlacard : MonoBehaviour {
 	{
 		if (_comportement.planteCourante != null) {
 			
-			_placard.value = GUI.VerticalSlider(new Rect(180, 40, 10, (_placard.placardHauteur - _comportement.planteCourante.texturePlante.height)), _comportement.value, 0, (_comportement.placardHauteur - _comportement.planteCourante.texturePlante.height - _comportement.joueur.lampe.textureLampe.height));
+			_comportement.value = GUI.VerticalSlider(new Rect(180, 40, 10, (_comportement.placardHauteur - _comportement.planteCourante.texturePlante.height)), _comportement.value, 0, (_comportement.placardHauteur - _comportement.planteCourante.texturePlante.height - _comportement.joueur.lampe.textureLampe.height));
 		}
 	}
 	#endregion

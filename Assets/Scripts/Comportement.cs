@@ -18,10 +18,10 @@ public class Comportement : MonoBehaviour {
 	public static string menuChoisit;
 	public static Joueur joueur;
 	public static float distance;
-	
+
 	UltiManage ultiManage;
 	float placardLargeur;
-	float placardHauteur;
+	public float placardHauteur;
 	float potLargeur;
 	float potHauteur;
 	float volume;
@@ -148,7 +148,7 @@ public class Comportement : MonoBehaviour {
 		Comportement.jour++;
 	}
 	
-	float value = 110;
+	public float value = 110;
 	bool isChanger = false;
 	bool isGraine = false;
 
