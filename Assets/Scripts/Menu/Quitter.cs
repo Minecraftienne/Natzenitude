@@ -19,11 +19,11 @@ public class Quitter : MonoBehaviour {
 
 	void OnMouseEnter ()
 	{
-		this.renderer.material.color = Color.black;
+		this.GetComponent<Renderer>().material.color = Color.black;
 	}
 
 	void OnMouseExit ()
 	{
-		this.renderer.material.color = Color.white;
+		this.GetComponent<Renderer>().material.color = Color.white;
 	}
 }

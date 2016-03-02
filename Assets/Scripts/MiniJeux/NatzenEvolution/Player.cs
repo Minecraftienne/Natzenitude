@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
-		switch(other.collider2D.name)
+		switch(other.GetComponent<Collider2D>().name)
 		{
 			case "GoutteDeauT1":
 				_manager.score += _waterDropSmall;

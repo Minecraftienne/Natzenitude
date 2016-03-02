@@ -164,7 +164,7 @@ public class Aide : MonoBehaviour {
 			if (GUIPlacard.jour >= 365) {
 
 				succes365 = true;
-				audio.PlayOneShot(succesReussi);
+				GetComponent<AudioSource>().PlayOneShot(succesReussi);
 				GUI.Box (new Rect (490, 10, 250, 80), "");
 				GUI.DrawTexture(new Rect(500, 0, 100, 100), miniature365, ScaleMode.ScaleToFit, true);
 				GUI.Label (new Rect (610, 40, 200, 20), "Succès 1 an réussi");
@@ -172,7 +172,7 @@ public class Aide : MonoBehaviour {
 
 			if (succesRichesse == true) {
 
-				audio.PlayOneShot(succesReussi);
+				GetComponent<AudioSource>().PlayOneShot(succesReussi);
 				GUI.Box (new Rect (490, 10, 250, 80), "");
 				GUI.DrawTexture(new Rect(500, 0, 100, 100), miniatureRichesse, ScaleMode.ScaleToFit, true);
 				GUI.Label (new Rect (610, 40, 200, 20), "Succès Richesse réussi");
